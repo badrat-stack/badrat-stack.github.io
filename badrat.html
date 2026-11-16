@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Badrat Music - Nyimbo Za Malawi</title>
+<meta name="description" content="Badrat Music - Kwezani ndi kumvetsera nyimbo za Malawi, Amapiano, Afro, Gospel, Hip Hop.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#0f0f0f;color:white;padding:15px}
+header{text-align:center;padding:20px 0}
+header h1{color:#1ed760;font-size:30px}
+header p{color:#aaa;margin-top:5px}
+.box{background:#1e1e1e;border:2px dashed #1ed760;border-radius:15px;padding:20px;text-align:center;margin:20px 0}
+label{display:block;text-align:left;margin:15px 0 5px 5px;color:#1ed760;font-weight:bold;font-size:14px}
+input[type="text"]{width:100%;padding:13px;border-radius:10px;border:1px solid #555;background:#ffffff;color:#000000;font-size:15px;outline:none}
+input[type="text"]::placeholder{color:#666}
+.btn{background:#1ed760;color:black;padding:13px 20px;border-radius:25px;font-weight:bold;cursor:pointer;display:inline-block;margin-top:12px;border:none;width:100%;font-size:16px}
+.btn-white{background:white;color:black;padding:12px 20px;border-radius:25px;font-weight:bold;cursor:pointer;display:inline-block;margin-top:10px;border:none;width:100%}
+.song{background:#1e1e1e;border-radius:12px;padding:12px;margin:10px 0}
+.song b{font-size:16px}
+.song span{color:#aaa;font-size:13px}
+audio{width:100%;margin-top:8px}
+.search{width:100%;padding:12px;border-radius:25px;border:none;background:#222;color:white;margin:10px 0;outline:none}
+</style>
+</head>
+<body>
+<header>
+<h1>🎵 BADRAT MUSIC</h1>
+<p>Kwezani Nyimbo Zanu - Mvetserani Kwaulere</p>
+</header>
+
+<input class="search" id="search" placeholder="🔍 Sakani nyimbo..." onkeyup="searchSong()">
+
+<div class="box">
+<h3>Kwezani Nyimbo Yanu</h3>
+
+<label>1. Sankhani Nyimbo (MP3):</label>
+<input type="file" id="audioFile" accept="audio/*" style="color:white">
+
+<label>2. Dzina La Nyimbo:</label>
+<input type="text" id="songTitle" placeholder="Mwachitsanzo: Moto">
+
+<label>3. Dzina La Artist:</label>
+<input type="text" id="artistName" placeholder="Mwachitsanzo: Badrat">
+
+<label>4. Sankhani Chithunzi (Cover):</label>
+<input type="file" id="coverFile" accept="image/*" style="color:white">
+
+<button class="btn" onclick="uploadSong()">UPLOAD NYIMBO 🚀</button>
+</div>
+
+<h2>Nyimbo Zaposachedwa</h2>
+<div id="songList"></div>
+<p style="text-align:center;color:#666;margin-top:30px">© 2026 Badrat Music - Made in Blantyre</p>
+
+<script>
+let songs = JSON.parse(localStorage.getItem('badratSongs') || '[]');
+function displaySongs(filter=""){
+  let list = document.getElementById('songList');
+  list.innerHTML = "";
+  if(songs.length==0){ list.innerHTML = "<p style='text-align:center;color:#888;margin:20px'>Palibe nyimbo pano. Kwezani yoyamba!</p>"; return; }
+  songs.forEach((s,i)=>{
+    if(filter && !s.title.toLowerCase().includes(filter.toLowerCase()) && !s.artist.toLowerCase().includes(filter.toLowerCase())) return;
+    list.innerHTML += `<div class="song"><b>${s.title}</b><br><span>${s.artist}</span><br><audio controls src="${s.audio}"></audio><br><button onclick="deleteSong(${i})" style="background:red;color:white;border:none;padding:6px 12px;border-radius:8px;margin-top:5px">Chotsani</button></div>`;
+  });
+}
+function searchSong(){ displaySongs(document.getElementById('search').value); }
+function deleteSong(i){ if(confirm('Chotsani nyimboyi?')){ songs.splice(i,1); localStorage.setItem('badratSongs', JSON.stringify(songs)); displaySongs(); } }
+function uploadSong(){
+  let title = document.getElementById('songTitle').value || "Nyimbo Yopanda Dzina";
+  let artist = document.getElementById('artistName').value || "Unknown Artist";
+  let audioFile = document.getElementById('audioFile').files[0];
+  if(!audioFile){ alert('Chonde sankhani nyimbo kaye!'); return; }
+  let reader = new FileReader();
+  reader.onload = function(e){
+    let audioData = e.target.result;
+    let coverFile = document.getElementById('coverFile').files[0];
+    if(coverFile){
+      let cr = new FileReader();
+      cr.onload = function(ev){ songs.unshift({title,artist,audio:audioData,cover:ev.target.result}); localStorage.setItem('badratSongs', JSON.stringify(songs)); displaySongs(); alert('Nyimbo yakwezedwa! 🎉'); };
+      cr.readAsDataURL(coverFile);
+    } else {
+      songs.unshift({title,artist,audio:audioData,cover:''}); localStorage.setItem('badratSongs', JSON.stringify(songs)); displaySongs(); alert('Nyimbo yakwezedwa! 🎉');
+    }
+  };
+  reader.readAsDataURL(audioFile);
+}
+displaySongs();
+</script>
+</body>
+</html>
