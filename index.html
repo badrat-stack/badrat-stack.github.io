@@ -4,64 +4,116 @@ html
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Badrat Music</title>
+<title>Badrat Music - V3</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-body{background:#0a0a0a;color:#fff;padding:15px;padding-bottom:130px}
+body{background:#0a0a0a;color:#fff;padding:15px;padding-bottom:110px}
 .header{text-align:center;padding:20px 0 10px}
 .header h1{color:#1ed760;font-size:32px}
+.header p{color:#aaa;font-size:14px}
+.search{width:100%;padding:13px;border-radius:25px;border:none;background:#222;color:#fff;font-size:16px;margin:15px 0;outline:none}
 .song{background:#1a1a1a;border-radius:15px;padding:15px;margin-bottom:12px}
-.song img{width:65px;height:65px;border-radius:10px;object-fit:cover}
 .song-top{display:flex;gap:12px;align-items:center}
+.song img{width:65px;height:65px;border-radius:10px;object-fit:cover;background:#333}
 .song-info{flex:1}
 .song-info b{font-size:17px;display:block}
-.btn-audio{background:#ffa200;color:#000;font-weight:bold;border:none;width:100%;padding:13px;border-radius:25px;font-size:16px;margin-top:12px;cursor:pointer}
+.song-info span{color:#aaa;font-size:13px}
+.plays{color:#1ed760!important;font-size:12px!important}
+.btn-play{background:#ffa200;color:#000;font-weight:bold;border:none;width:100%;padding:13px;border-radius:25px;font-size:16px;margin-top:12px;cursor:pointer}
 .btn-dl{background:#fff;color:#000;text-decoration:none;text-align:center;padding:10px;border-radius:20px;font-size:13px;font-weight:bold;display:block;margin-top:8px}
 .ad-box{background:#222;border:1px dashed #555;border-radius:12px;padding:14px;text-align:center;margin:12px 0;color:#aaa;font-size:12px}
-.ad-box b{color:#ffcc00}
+.ad-box b{color:#ffcc00;font-size:14px}
+.local-ad{background:linear-gradient(135deg,#ff4444,#ff8800);border-radius:12px;padding:16px;text-align:center;margin:12px 0}
+.local-ad b{font-size:17px}
 .sticky-ad{position:fixed;bottom:0;left:0;right:0;background:#111;border-top:2px solid #1ed760;padding:12px;text-align:center;z-index:100;font-size:12px}
 .sticky-ad a{color:#1ed760;font-weight:bold;text-decoration:none}
-.local-ad{background:linear-gradient(135deg,#ff4444,#ff8800);border-radius:12px;padding:16px;text-align:center;margin:12px 0}
-.search{width:100%;padding:13px;border-radius:25px;border:none;background:#222;color:#fff;font-size:16px;margin:15px 0}
+.footer{text-align:center;color:#666;margin-top:25px;font-size:13px;line-height:1.6}
+.wa-float{position:fixed;bottom:80px;right:20px;background:#25D366;color:#fff;width:55px;height:55px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;text-decoration:none;z-index:99}
 </style>
 </head>
 <body>
-<div class="header"><h1>🎵 BADRAT MUSIC</h1><p>Mvetserani Kwaulere Pa Audiomack</p></div>
 
-<div class="ad-box"><b>📢 Advert Yanu Pano - K20,000 / Mwezi</b><br>WhatsApp: 0887222489</div>
+<div class="header">
+<h1>🎵 BADRAT MUSIC</h1>
+<p>Mvetserani Kwaulere Pa Audiomack</p>
+</div>
+
+<!-- AD 1 - TOP -->
+<div class="ad-box">
+<b>📢 Advert Yanu Pano - K20,000 / Mwezi</b><br>
+<span>Shopu / Saloon / Restaurant - Anthu 1000+ amawona pano<br>WhatsApp: 0887222489</span>
+</div>
 
 <input type="text" id="search" class="search" placeholder="🔍 Sakani nyimbo..." oninput="renderSongs()">
 
-<div class="local-ad"><b>🏪 BUSINESS YANU IKHOZA KUKHALA PANO!</b><br>Advert Pano: K20,000 / Mwezi - WhatsApp 0887222489</div>
+<!-- AD 2 - LOCAL -->
+<div class="local-ad">
+<b>🏪 BUSINESS YANU IKHOZA KUKHALA PANO!</b><br>
+<span style="font-size:13px">Advert Pano: K20,000 / Mwezi Only - WhatsApp 0887222489</span>
+</div>
 
 <h2 style="margin:20px 0 10px">Nyimbo Zaposachedwa 🎧</h2>
 <div id="songList"></div>
 
-<div class="ad-box"><b>🔥 Sponsored - Monetag Ad</b><br>Mukapeza code ya Monetag, ndidzakuiika pano.</div>
-<div style="text-align:center;color:#666;margin-top:20px;font-size:13px">© 2026 Badrat Music - Blantyre<br>Mpamba: 0887222489 | Airtel Money: 0983523722</div>
-<div class="sticky-ad"><span style="color:#aaa">ADVERTISEMENT • </span><a href="https://wa.me/265887222489" target="_blank">📢 Ikani Advert Yanu Pano - Dinani Pano</a></div>
+<!-- AD 3 - MID -->
+<div class="ad-box">
+<b>🔥 Sponsored</b><br>
+<span>Mukapeza code ya Monetag, ndidzakuiika pano ndipo mukalipilidwa pa view iliyonse.</span>
+</div>
+
+<div class="footer">
+© 2026 Badrat Music - Made in Blantyre<br>
+Mpamba: 0887222489 | Airtel Money: 0983523722<br>
+Kwezani Nyimbo Yanu: WhatsApp 0887222489 - K2,000 / Nyimbo
+</div>
+
+<a class="wa-float" href="https://wa.me/265887222489" target="_blank">💬</a>
+
+<!-- AD 4 - STICKY BOTTOM -->
+<div class="sticky-ad">
+<span style="color:#aaa">ADVERTISEMENT • </span>
+<a href="https://wa.me/265887222489?text=Moni%20ndikufuna%20kuika%20advert" target="_blank">📢 Ikani Advert Yanu Pano - Dinani Pano</a>
+</div>
 
 <script>
 let songs = [
-  {title:"Higher Heights",artist:"Sir Spark",cover:"https://picsum.photos/200/200?random=99", audiomack:"https://audiomack.com/sir-spark/song/higher-heights"},
-  {title:"Mommy Prayer",artist:"Sir Spark",cover:"https://picsum.photos/200/200?random=100", audiomack:"https://audiomack.com/sir-spark/song/mommy-prayer"},
-  {title:"Apo Ndi Apo",artist:"Yush Lawd",cover:"https://picsum.photos/200/200?random=101", audiomack:"https://audiomack.com/yush-lawd/song/apo-ndi-apo"}
+  {title:"Higher Heights", artist:"Sir Spark", cover:"https://picsum.photos/200/200?random=99", audiomack:"https://audiomack.com/sir-spark/song/higher-heights"},
+  {title:"Mommy Prayer", artist:"Sir Spark", cover:"https://picsum.photos/200/200?random=100", audiomack:"https://audiomack.com/sir-spark/song/mommy-prayer"},
+  {title:"Apo Ndi Apo", artist:"Yush Lawd", cover:"https://picsum.photos/200/200?random=101", audiomack:"https://audiomack.com/yush-lawd/song/apo-ndi-apo"}
 ];
+
 function renderSongs(){
-  const q=document.getElementById('search').value.toLowerCase();
-  const list=document.getElementById('songList');
-  const filtered=songs.filter(s=>(s.title+" "+s.artist).toLowerCase().includes(q));
-  list.innerHTML=filtered.map(s=>{
-    const plays = localStorage.getItem('plays_'+s.title) || 0;
-    return `<div class="song"><div class="song-top"><img src="${s.cover}"><div class="song-info"><b>${s.title}</b><span>${s.artist}</span><br><span style="font-size:12px;color:#1ed760">👁️ ${plays} Plays Pa Badrat Music</span></div></div><button class="btn-audio" onclick="playOnAudiomack('${s.title}','${s.audiomack}')">▶️ Mverani Pa Audiomack</button><a class="btn-dl" href="${s.audiomack}" target="_blank">⬇️ Download Pa Audiomack</a></div>`
+  const q = document.getElementById('search').value.toLowerCase();
+  const list = document.getElementById('songList');
+  const filtered = songs.filter(s => (s.title + " " + s.artist).toLowerCase().includes(q));
+  if(filtered.length === 0){
+    list.innerHTML = '<p style="text-align:center;color:#aaa;padding:20px">Palibe nyimbo yapezeka.</p>';
+    return;
+  }
+  list.innerHTML = filtered.map(s => {
+    const plays = localStorage.getItem('plays_' + s.title) || 0;
+    return `<div class="song">
+      <div class="song-top">
+        <img src="${s.cover}">
+        <div class="song-info">
+          <b>${s.title}</b>
+          <span>${s.artist}</span><br>
+          <span class="plays">👁️ ${plays} Plays Pa Badrat Music</span>
+        </div>
+      </div>
+      <button class="btn-play" onclick="playOnAudiomack('${s.title}','${s.audiomack}')">▶️ Mverani Pa Audiomack</button>
+      <a class="btn-dl" href="${s.audiomack}" target="_blank">⬇️ Download Pa Audiomack</a>
+    </div>`
   }).join('');
 }
-function playOnAudiomack(title,url){
-  let c=parseInt(localStorage.getItem('plays_'+title)||0)+1;
-  localStorage.setItem('plays_'+title,c);
+
+function playOnAudiomack(title, url){
+  let c = parseInt(localStorage.getItem('plays_' + title) || 0) + 1;
+  localStorage.setItem('plays_' + title, c);
   renderSongs();
-  window.open(url,'_blank');
+  window.open(url, '_blank');
 }
+
 renderSongs();
 </script>
 </body>
