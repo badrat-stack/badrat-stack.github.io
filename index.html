@@ -31,7 +31,6 @@ h2.section{margin:25px 0 10px;font-size:24px}
 .song-info span{color:#aaa;font-size:13px}
 .song-actions{display:flex;flex-direction:column;gap:7px}
 .dl-btn{background:#fff;color:#000;text-decoration:none;text-align:center;padding:8px 10px;border-radius:20px;font-size:13px;font-weight:bold}
-.dl-btn-green{background:#1ed760;color:#000;text-decoration:none;text-align:center;padding:8px 10px;border-radius:20px;font-size:13px;font-weight:bold}
 .wa-float{position:fixed;bottom:20px;right:20px;background:#25D366;color:#fff;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;text-decoration:none;z-index:99}
 .footer{text-align:center;color:#666;margin-top:30px;font-size:13px}
 .modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;padding:20px;z-index:999}
@@ -41,6 +40,8 @@ h2.section{margin:25px 0 10px;font-size:24px}
 .modal-box button{width:100%;padding:13px;border:none;border-radius:25px;font-weight:bold;margin-top:10px;cursor:pointer}
 .pay-box{background:#222;border-radius:12px;padding:14px;margin-top:12px}
 .pay-num{background:#000;padding:12px;border-radius:10px;text-align:center;margin:8px 0;line-height:1.6}
+.play-btn{background:#1ed760;border:none;padding:8px 16px;border-radius:20px;font-weight:bold;cursor:pointer;white-space:nowrap}
+.seek{flex:1;accent-color:#1ed760}
 </style>
 </head>
 <body>
@@ -104,7 +105,7 @@ h2.section{margin:25px 0 10px;font-size:24px}
 </div>
 </div>
 
-<h2 class="section">Nyimbo Zaposachedwa - Mvetserani Ulere 🎧</h2>
+<h2 class="section">Nyimbo Zaposachedwa - Mvetserani Pompo 🎧</h2>
 <div id="songList"></div>
 
 <div class="footer">© 2026 Badrat Music - Made in Blantyre<br>Mpamba: 0887222489 | Airtel Money: 0983523722</div>
@@ -124,15 +125,74 @@ h2.section{margin:25px 0 10px;font-size:24px}
 
 <script>
 const songs = [
-  {title:"Higher Heights",artist:"Sir Spark",cover:"https://picsum.photos/200/200?random=99",url:"https://audiomack.com/sirspark382/song/higher-heights?share-user-id=243951082"},
-  {title:"Mommy Prayer",artist:"Sir Spark",cover:"https://picsum.photos/200/200?random=100",url:"https://audiomack.com/sirspark382/song/69300551951f1?share-user-id=243951082"},
-  {title:"Apo Ndi Apo",artist:"Yush Lawd",cover:"https://picsum.photos/200/200?random=101",url:"https://audiomack.com/yush-lawd/song/apo-ndi-apo?share-user-id=243951082"}
+  {title:"Higher Heights",artist:"Sir Spark",cover:"https://picsum.photos/200/200?random=99",url:"higher-heights.mp3"},
+  {title:"Mommy Prayer",artist:"Sir Spark",cover:"https://picsum.photos/200/200?random=100",url:"mommy-prayer.mp3"},
+  {title:"Apo Ndi Apo",artist:"Yush Lawd",cover:"https://picsum.photos/200/200?random=101",url:"apo-ndi-apo.mp3"}
 ];
+
+let currentAudio = null;
+let currentBtn = null;
+
 function renderSongs(){
   const q=document.getElementById('search').value.toLowerCase();
   const list=document.getElementById('songList');
   const filtered=songs.filter(s=>(s.title+" "+s.artist).toLowerCase().includes(q));
-  list.innerHTML=filtered.map(s=>`<div class="song"><img src="${s.cover}"><div class="song-info"><b>${s.title}</b><span>${s.artist}</span><br><a class="dl-btn-green" href="${s.url}" target="_blank" style="display:inline-block;margin-top:8px">▶️ Mvetserani - ULERE</a></div><div class="song-actions"><a class="dl-btn" href="${s.url}" target="_blank">⬇️ Download Ulere</a></div></div>`).join('');
+  list.innerHTML=filtered.map((s)=>{
+    const plays = localStorage.getItem('plays_'+s.title) || 0;
+    const dls = localStorage.getItem('dls_'+s.title) || 0;
+    return `
+    <div class="song">
+      <img src="${s.cover}">
+      <div class="song-info">
+        <b>${s.title}</b>
+        <span>${s.artist}</span><br>
+        <span style="font-size:12px;color:#1ed760">👁️ ${plays} Plays | ⬇️ ${dls} Downloads</span>
+        <audio id="audio-${s.title}" src="${s.url}" preload="none" onended="resetBtn('${s.title}')"></audio>
+        <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+          <button onclick="togglePlay('${s.title}')" id="btn-${s.title}" class="play-btn">▶️ Play</button>
+          <input type="range" min="0" max="100" value="0" id="seek-${s.title}" class="seek" onchange="seekAudio('${s.title}',this.value)">
+        </div>
+      </div>
+      <div class="song-actions">
+        <a class="dl-btn" href="${s.url}" download onclick="addDownload('${s.title}')">⬇️ Download Ulere</a>
+      </div>
+    </div>`
+  }).join('');
+}
+
+function togglePlay(title){
+  const audio = document.getElementById('audio-'+title);
+  const btn = document.getElementById('btn-'+title);
+  if(currentAudio && currentAudio !== audio){ currentAudio.pause(); if(currentBtn) currentBtn.innerText='▶️ Play'; }
+  if(audio.paused){
+    audio.play();
+    btn.innerText='⏸️ Pause';
+    currentAudio=audio; currentBtn=btn;
+    addPlay(title);
+    audio.ontimeupdate = ()=>{
+      const seek = document.getElementById('seek-'+title);
+      if(seek && audio.duration) seek.value = (audio.currentTime/audio.duration)*100;
+    };
+  } else {
+    audio.pause();
+    btn.innerText='▶️ Play';
+  }
+}
+function resetBtn(title){
+  const btn=document.getElementById('btn-'+title);
+  if(btn) btn.innerText='▶️ Play';
+}
+function seekAudio(title, val){
+  const audio=document.getElementById('audio-'+title);
+  if(audio.duration) audio.currentTime = (val/100)*audio.duration;
+}
+function addPlay(title){
+  let c = parseInt(localStorage.getItem('plays_'+title) || 0) + 1;
+  localStorage.setItem('plays_'+title, c);
+}
+function addDownload(title){
+  let c = parseInt(localStorage.getItem('dls_'+title) || 0) + 1;
+  localStorage.setItem('dls_'+title, c);
 }
 function openModal(){document.getElementById('loginModal').style.display='flex'}
 function closeModal(){document.getElementById('loginModal').style.display='none'}
@@ -154,7 +214,6 @@ function doLogin(){
   const pass=document.getElementById('regPass').value.trim();
   if(!name||!phone||!pass){alert('Lembani dzina, nambala ndi password zonse');return;}
   localStorage.setItem('badrat_user',name);
-  // NDIWE MWINI WEBSITE - SULIPIRA
   if(phone === "0887222489" || phone === "0983523722" || name.toLowerCase() === "badrat"){
     localStorage.setItem('badrat_admin','yes');
     localStorage.setItem('badrat_paid','yes');
