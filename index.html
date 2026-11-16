@@ -4,245 +4,65 @@ html
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Badrat Music - Nyimbo Za Malawi</title>
+<title>Badrat Music</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 body{background:#0a0a0a;color:#fff;padding:15px;padding-bottom:130px}
 .header{text-align:center;padding:20px 0 10px}
 .header h1{color:#1ed760;font-size:32px}
-.top-bar{display:flex;justify-content:space-between;align-items:center;background:#1a1a1a;padding:10px 12px;border-radius:12px;margin-bottom:10px}
-.top-bar button{padding:8px 14px;border:none;border-radius:20px;font-weight:bold;cursor:pointer}
-.btn-login{background:#fff;color:#000}
-.btn-logout{background:#ff4444;color:#fff}
-.search{width:100%;padding:13px;border-radius:25px;border:none;background:#222;color:#fff;font-size:16px;margin:15px 0;outline:none}
-.upload-box{border:2px dashed #1ed760;border-radius:15px;padding:18px;background:#111}
-.upload-box h2{text-align:center;margin-bottom:10px}
-.upload-box label{color:#1ed760;font-weight:bold;display:block;margin:12px 0 5px}
-.upload-box input,.upload-box select{width:100%;padding:12px;border-radius:10px;border:none;font-size:15px}
-.btn-green{background:#1ed760;color:#000;font-weight:bold;border:none;width:100%;padding:14px;border-radius:25px;font-size:17px;margin-top:15px;cursor:pointer}
-.btn-pay{background:#ffcc00;color:#000;font-weight:bold;border:none;width:100%;padding:14px;border-radius:25px;font-size:16px;margin-top:12px;cursor:pointer}
-.locked{background:#222;border-radius:12px;padding:15px;text-align:center;margin-top:10px;color:#ccc}
-h2.section{margin:25px 0 10px;font-size:24px}
-.song{background:#1a1a1a;border-radius:15px;padding:15px;margin-bottom:12px;display:flex;gap:12px;align-items:center}
-.song img{width:65px;height:65px;border-radius:10px;object-fit:cover;background:#333}
+.song{background:#1a1a1a;border-radius:15px;padding:15px;margin-bottom:12px}
+.song img{width:65px;height:65px;border-radius:10px;object-fit:cover}
+.song-top{display:flex;gap:12px;align-items:center}
 .song-info{flex:1}
 .song-info b{font-size:17px;display:block}
-.song-info span{color:#aaa;font-size:13px}
-.song-actions{display:flex;flex-direction:column;gap:7px}
-.dl-btn{background:#fff;color:#000;text-decoration:none;text-align:center;padding:8px 10px;border-radius:20px;font-size:13px;font-weight:bold;cursor:pointer;border:none}
-.wa-float{position:fixed;bottom:100px;right:20px;background:#25D366;color:#fff;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;text-decoration:none;z-index:99}
-.footer{text-align:center;color:#666;margin-top:30px;font-size:13px}
-.modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;padding:20px;z-index:999}
-.modal-box{background:#1a1a1a;width:100%;max-width:380px;border-radius:15px;padding:20px}
-.modal-box h3{text-align:center;margin-bottom:12px}
-.modal-box input{width:100%;padding:12px;border-radius:10px;border:none;margin:8px 0}
-.modal-box button{width:100%;padding:13px;border:none;border-radius:25px;font-weight:bold;margin-top:10px;cursor:pointer}
-.pay-box{background:#222;border-radius:12px;padding:14px;margin-top:12px}
-.pay-num{background:#000;padding:12px;border-radius:10px;text-align:center;margin:8px 0;line-height:1.6}
-.play-btn{background:#1ed760;border:none;padding:8px 16px;border-radius:20px;font-weight:bold;cursor:pointer;white-space:nowrap}
-.seek{flex:1;accent-color:#1ed760}
-.error-msg{color:#ff4444;font-size:12px;display:none;margin-top:5px}
+.btn-audio{background:#ffa200;color:#000;font-weight:bold;border:none;width:100%;padding:13px;border-radius:25px;font-size:16px;margin-top:12px;cursor:pointer}
+.btn-dl{background:#fff;color:#000;text-decoration:none;text-align:center;padding:10px;border-radius:20px;font-size:13px;font-weight:bold;display:block;margin-top:8px}
 .ad-box{background:#222;border:1px dashed #555;border-radius:12px;padding:14px;text-align:center;margin:12px 0;color:#aaa;font-size:12px}
-.ad-box b{color:#ffcc00;font-size:14px}
-.local-ad{background:linear-gradient(135deg,#ff4444,#ff8800);border-radius:12px;padding:16px;text-align:center;margin:12px 0}
-.local-ad b{font-size:17px}
+.ad-box b{color:#ffcc00}
 .sticky-ad{position:fixed;bottom:0;left:0;right:0;background:#111;border-top:2px solid #1ed760;padding:12px;text-align:center;z-index:100;font-size:12px}
 .sticky-ad a{color:#1ed760;font-weight:bold;text-decoration:none}
-.ad-label{font-size:10px;color:#888;letter-spacing:1px}
+.local-ad{background:linear-gradient(135deg,#ff4444,#ff8800);border-radius:12px;padding:16px;text-align:center;margin:12px 0}
+.search{width:100%;padding:13px;border-radius:25px;border:none;background:#222;color:#fff;font-size:16px;margin:15px 0}
 </style>
 </head>
 <body>
+<div class="header"><h1>🎵 BADRAT MUSIC</h1><p>Mvetserani Kwaulere Pa Audiomack</p></div>
 
-<div class="header"><h1>🎵 BADRAT MUSIC</h1><p>Mvetserani Kwaulere - Kwezani Nyimbo Yanu Pa K2,000</p></div>
-
-<div class="ad-box"><div class="ad-label">ADVERTISEMENT</div><b>📢 Advert Yanu Pano - K20,000 / Mwezi</b><br><span>Shopu / Saloon / Restaurant - Anthu 1000+ amawona pano tsiku lililonse<br>WhatsApp: 0887222489</span></div>
-
-<div class="top-bar">
-  <span id="userLabel">👤 Alendo - Mutha kumvetsera ulere</span>
-  <div>
-    <button class="btn-login" id="loginBtn" onclick="openModal()">Sign In / Pangani Account</button>
-    <button class="btn-logout" id="logoutBtn" onclick="logout()" style="display:none">Tulukani</button>
-  </div>
-</div>
+<div class="ad-box"><b>📢 Advert Yanu Pano - K20,000 / Mwezi</b><br>WhatsApp: 0887222489</div>
 
 <input type="text" id="search" class="search" placeholder="🔍 Sakani nyimbo..." oninput="renderSongs()">
 
-<div class="upload-box">
-<h2>Kwezani Nyimbo Yanu - K2,000 / Nyimbo</h2>
-<p style="text-align:center;color:#aaa;font-size:13px">Kumvetsera ndi Download ndi zaulere. Kulipira ndi kwa Upload kokha.</p>
-<div id="needLogin" class="locked">🔒 Kuti mukweze nyimbo, choyamba <b>pangani account</b> kapena <b>lowani</b>.<br><br><button class="btn-green" onclick="openModal()">Sign In Tsopano</button></div>
-<div id="needPay" style="display:none">
-  <div class="pay-box">
-    <h3 style="color:#ffcc00;text-align:center">💰 Lipira K2,000 Pa Nyimbo Imodzi</h3>
-    <p style="font-size:14px;color:#ddd;margin:8px 0;text-align:center">Tumizani <b>K2,000</b> ku imodzi mwa izi:</p>
-    <div class="pay-num">
-      <b style="color:#ff4444">📱 Mpamba: 0887222489</b><br><span style="font-size:12px;color:#aaa">Dzina: Badrat</span><br><br>
-      <b style="color:#ff4444">📱 Airtel Money: 0983523722</b><br><span style="font-size:12px;color:#aaa">Dzina: Badrat</span>
-    </div>
-    <label style="color:#fff">Sankhani komwe mwalipira:</label>
-    <select id="payMethod"><option value="Mpamba">Mpamba - 0887222489</option><option value="Airtel Money">Airtel Money - 0983523722</option></select>
-    <label style="color:#fff">Lembani Code ya Transaction:</label>
-    <input type="text" id="transCode" placeholder="Mwachitsanzo: AB123XYZ">
-    <button class="btn-pay" onclick="confirmPayment()">✅ Ndalipira - Tsegulani Upload</button>
-  </div>
-</div>
-<div id="uploadForm" style="display:none">
-  <p id="adminNote" style="background:#1ed760;color:#000;padding:10px;border-radius:10px;text-align:center;font-weight:bold">✅ Malipiro Alandiridwa - Mutha Kukweza Nyimbo Imodzi Tsopano</p>
-  <label>1. Dzina La Nyimbo:</label><input type="text" id="songTitle" placeholder="Mwachitsanzo: Moto">
-  <label>2. Dzina La Artist:</label><input type="text" id="artistName" placeholder="Mwachitsanzo: Badrat">
-  <label>3. Sankhani Fayilo Ya Nyimbo (MP3):</label><input type="file" id="songFile" accept="audio/*">
-  <label>4. Sankhani Chithunzi (Cover):</label><input type="file" id="coverFile" accept="image/*">
-  <button class="btn-green" id="uploadBtn" onclick="uploadDirect()">UPLOAD NYIMBO POMPO 🚀</button>
-  <p style="font-size:12px;color:#aaa;text-align:center;margin-top:8px">Nyimboyo idzawonekera pompo, SIKUPITA ku WhatsApp.</p>
-  <p id="uploadStatus" style="text-align:center;color:#1ed760;font-weight:bold;margin-top:8px"></p>
-</div>
-</div>
+<div class="local-ad"><b>🏪 BUSINESS YANU IKHOZA KUKHALA PANO!</b><br>Advert Pano: K20,000 / Mwezi - WhatsApp 0887222489</div>
 
-<div class="local-ad"><b>🏪 BUSINESS YANU IKHOZA KUKHALA PANO!</b><br><span style="font-size:13px">Shopu / Saloon / Restaurant - Anthu 1000+ amawona website tsiku lililonse<br>Advert Pano: K20,000 / Mwezi Only - WhatsApp 0887222489</span></div>
-
-<h2 class="section">Nyimbo Zaposachedwa - Mvetserani Pompo 🎧</h2>
+<h2 style="margin:20px 0 10px">Nyimbo Zaposachedwa 🎧</h2>
 <div id="songList"></div>
 
-<div class="ad-box"><div class="ad-label">ADVERTISEMENT</div><b>🔥 Sponsored - Malo A Advert A International</b><br><span>Mukangopeza code ya Monetag, advert yeniyeni idzawonekera pano ndipo mukalipilidwa pa view iliyonse.</span></div>
-
-<div class="footer">© 2026 Badrat Music - Made in Blantyre<br>Mpamba: 0887222489 | Airtel Money: 0983523722</div>
-<a class="wa-float" href="https://wa.me/265887222489" target="_blank">💬</a>
-
-<div class="sticky-ad"><span style="color:#aaa">ADVERTISEMENT • </span><a href="https://wa.me/265887222489?text=Moni%20ndikufuna%20kuika%20advert%20pa%20Badrat%20Music" target="_blank">📢 Ikani Advert Yanu Pano - K20,000 / Mwezi - Dinani Pano</a><span style="color:#aaa"> • Badrat Music</span></div>
-
-<div class="modal" id="loginModal">
-  <div class="modal-box">
-    <h3>👤 Sign In / Pangani Account</h3>
-    <input type="text" id="regName" placeholder="Dzina Lanu Lonse">
-    <input type="text" id="regPhone" placeholder="Nambala Ya Foni (088...)">
-    <input type="password" id="regPass" placeholder="Pangani Password">
-    <button style="background:#1ed760" onclick="doLogin()">Pangani Account / Lowani</button>
-    <button style="background:#333;color:#fff" onclick="closeModal()">Tsekani</button>
-  </div>
-</div>
+<div class="ad-box"><b>🔥 Sponsored - Monetag Ad</b><br>Mukapeza code ya Monetag, ndidzakuiika pano.</div>
+<div style="text-align:center;color:#666;margin-top:20px;font-size:13px">© 2026 Badrat Music - Blantyre<br>Mpamba: 0887222489 | Airtel Money: 0983523722</div>
+<div class="sticky-ad"><span style="color:#aaa">ADVERTISEMENT • </span><a href="https://wa.me/265887222489" target="_blank">📢 Ikani Advert Yanu Pano - Dinani Pano</a></div>
 
 <script>
-let defaultSongs = [
-  {title:"Higher Heights",artist:"Sir Spark",cover:"https://picsum.photos/200/200?random=99",url:"higher-heights.mp3"},
-  {title:"Mommy Prayer",artist:"Sir Spark",cover:"https://picsum.photos/200/200?random=100",url:"mommy-prayer.mp3"},
-  {title:"Apo Ndi Apo",artist:"Yush Lawd",cover:"https://picsum.photos/200/200?random=101",url:"apo-ndi-apo.mp3"}
+let songs = [
+  {title:"Higher Heights",artist:"Sir Spark",cover:"https://picsum.photos/200/200?random=99", audiomack:"https://audiomack.com/sir-spark/song/higher-heights"},
+  {title:"Mommy Prayer",artist:"Sir Spark",cover:"https://picsum.photos/200/200?random=100", audiomack:"https://audiomack.com/sir-spark/song/mommy-prayer"},
+  {title:"Apo Ndi Apo",artist:"Yush Lawd",cover:"https://picsum.photos/200/200?random=101", audiomack:"https://audiomack.com/yush-lawd/song/apo-ndi-apo"}
 ];
-let savedSongs = [];
-try{ savedSongs = JSON.parse(localStorage.getItem('badrat_saved_songs') || '[]'); }catch(e){ savedSongs=[]; }
-let songs = [...savedSongs, ...defaultSongs];
-let currentAudio = null;
-let currentBtn = null;
-
 function renderSongs(){
   const q=document.getElementById('search').value.toLowerCase();
   const list=document.getElementById('songList');
   const filtered=songs.filter(s=>(s.title+" "+s.artist).toLowerCase().includes(q));
-  if(filtered.length===0){ list.innerHTML='<p style="text-align:center;color:#aaa;padding:20px">Palibe nyimbo yapezeka. Sakani dzina lina.</p>'; return; }
-  list.innerHTML=filtered.map((s)=>{
+  list.innerHTML=filtered.map(s=>{
     const plays = localStorage.getItem('plays_'+s.title) || 0;
-    const dls = localStorage.getItem('dls_'+s.title) || 0;
-    const safeTitle = s.title.replace(/[^a-zA-Z0-9]/g,"_");
-    return `<div class="song"><img src="${s.cover}" onerror="this.src='https://picsum.photos/200/200?random=1'"><div class="song-info"><b>${s.title}</b><span>${s.artist}</span><br><span style="font-size:12px;color:#1ed760">👁️ ${plays} Plays | ⬇️ ${dls} Downloads</span><audio id="audio-${safeTitle}" src="${s.url}" preload="none" onended="resetBtn('${safeTitle}')"></audio><p id="err-${safeTitle}" class="error-msg">⚠️ MP3 sinakwezedwe ku GitHub. Kwezani fayilo ya ${s.url}</p><div style="margin-top:8px;display:flex;gap:8px;align-items:center"><button onclick="togglePlay('${safeTitle}')" id="btn-${safeTitle}" class="play-btn">▶️ Play</button><input type="range" min="0" max="100" value="0" id="seek-${safeTitle}" class="seek" onchange="seekAudio('${safeTitle}',this.value)"></div></div><div class="song-actions"><button class="dl-btn" onclick="doDownload('${s.url}','${s.title}')">⬇️ Download</button></div></div>`
+    return `<div class="song"><div class="song-top"><img src="${s.cover}"><div class="song-info"><b>${s.title}</b><span>${s.artist}</span><br><span style="font-size:12px;color:#1ed760">👁️ ${plays} Plays Pa Badrat Music</span></div></div><button class="btn-audio" onclick="playOnAudiomack('${s.title}','${s.audiomack}')">▶️ Mverani Pa Audiomack</button><a class="btn-dl" href="${s.audiomack}" target="_blank">⬇️ Download Pa Audiomack</a></div>`
   }).join('');
 }
-function showError(title){ const el=document.getElementById('err-'+title); if(el) el.style.display='block'; }
-function togglePlay(title){
-  const audio = document.getElementById('audio-'+title);
-  const btn = document.getElementById('btn-'+title);
-  if(!audio) return;
-  if(currentAudio && currentAudio !== audio){ currentAudio.pause(); if(currentBtn) currentBtn.innerText='▶️ Play'; }
-  if(audio.paused){
-    audio.play().then(()=>{
-      btn.innerText='⏸️ Pause'; currentAudio=audio; currentBtn=btn; addPlay(title);
-      audio.ontimeupdate = ()=>{ const seek=document.getElementById('seek-'+title); if(seek && audio.duration) seek.value=(audio.currentTime/audio.duration)*100; };
-    }).catch(()=>{ showError(title); alert('MP3 ya '+title+' sinapezeke. Kwezani fayilo ku GitHub.'); });
-  } else { audio.pause(); btn.innerText='▶️ Play'; }
+function playOnAudiomack(title,url){
+  let c=parseInt(localStorage.getItem('plays_'+title)||0)+1;
+  localStorage.setItem('plays_'+title,c);
+  renderSongs();
+  window.open(url,'_blank');
 }
-function resetBtn(title){ const btn=document.getElementById('btn-'+title); if(btn) btn.innerText='▶️ Play'; }
-function seekAudio(title,val){ const audio=document.getElementById('audio-'+title); if(audio && audio.duration) audio.currentTime=(val/100)*audio.duration; }
-function addPlay(title){ let c=parseInt(localStorage.getItem('plays_'+title)||0)+1; localStorage.setItem('plays_'+title,c); }
-function addDownload(title){ let c=parseInt(localStorage.getItem('dls_'+title)||0)+1; localStorage.setItem('dls_'+title,c); }
-async function doDownload(url,title){
-  addDownload(title);
-  try{
-    const res = await fetch(url);
-    if(!res.ok) throw new Error('not found');
-    const blob = await res.blob();
-    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=title+'.mp3'; document.body.appendChild(a); a.click(); a.remove();
-  }catch(e){
-    if(url.startsWith('data:')){ const a=document.createElement('a'); a.href=url; a.download=title+'.mp3'; document.body.appendChild(a); a.click(); a.remove(); return; }
-    alert('Download yalephera chifukwa MP3 ya '+title+' sinapezeke ku GitHub. Kwezani fayilo ya '+url);
-  }
-}
-function openModal(){document.getElementById('loginModal').style.display='flex'}
-function closeModal(){document.getElementById('loginModal').style.display='none'}
-function updateUI(){
-  const user=localStorage.getItem('badrat_user'); const paid=localStorage.getItem('badrat_paid'); const isAdmin=localStorage.getItem('badrat_admin');
-  document.getElementById('needLogin').style.display = user ? 'none':'block';
-  document.getElementById('needPay').style.display = (user && !paid) ? 'block':'none';
-  document.getElementById('uploadForm').style.display = (user && paid) ? 'block':'none';
-  document.getElementById('loginBtn').style.display = user ? 'none':'block';
-  document.getElementById('logoutBtn').style.display = user ? 'block':'none';
-  document.getElementById('userLabel').innerText = isAdmin ? '👑 ADMIN - Takulandirani BOSS Badrat' : (user ? '👤 Takulandirani, '+user : '👤 Alendo - Mutha kumvetsera ulere');
-  if(isAdmin){ document.getElementById('adminNote').innerText = '👑 ADMIN MODE - Upload Ndi Yaulere Kwa Inu Boss'; }
-}
-function doLogin(){
-  const name=document.getElementById('regName').value.trim(); const phone=document.getElementById('regPhone').value.trim(); const pass=document.getElementById('regPass').value.trim();
-  if(!name||!phone||!pass){alert('Lembani dzina, nambala ndi password zonse');return;}
-  localStorage.setItem('badrat_user',name);
-  if(phone === "0887222489" || phone === "0983523722" || name.toLowerCase() === "badrat"){ localStorage.setItem('badrat_admin','yes'); localStorage.setItem('badrat_paid','yes'); closeModal(); updateUI(); alert('Takulandirani BOSS Badrat! 👑'); return; }
-  closeModal(); updateUI(); alert('Takulandirani '+name+'! Tsopano lipirani K2,000 kuti mukweze.');
-}
-function logout(){localStorage.removeItem('badrat_user');localStorage.removeItem('badrat_paid');localStorage.removeItem('badrat_admin');updateUI();}
-function confirmPayment(){
-  const code=document.getElementById('transCode').value.trim();
-  if(code.length<4){alert('Lembani Code ya Transaction');return;}
-  localStorage.setItem('badrat_paid','yes'); updateUI(); alert('Malipiro alandiridwa! Tsopano mukhoza kukweza.');
-}
-function readFileAsDataURL(file){
-  return new Promise((resolve,reject)=>{
-    const reader = new FileReader();
-    reader.onload = ()=> resolve(reader.result);
-    reader.onerror = ()=> reject(reader.error);
-    reader.readAsDataURL(file);
-  });
-}
-async function uploadDirect(){
-  const title=document.getElementById('songTitle').value.trim();
-  const artist=document.getElementById('artistName').value.trim();
-  const songFile=document.getElementById('songFile').files[0];
-  const coverFile=document.getElementById('coverFile').files[0];
-  const status=document.getElementById('uploadStatus');
-  const btn=document.getElementById('uploadBtn');
-  if(!title||!artist){alert('Lembani dzina la nyimbo ndi artist');return;}
-  if(!songFile){alert('Sankhani fayilo ya MP3');return;}
-  if(songFile.size > 8*1024*1024){ alert('MP3 ndi yayikulu kwambiri. Sankhani MP3 yosakwana 8MB. Kanikizani MP3 pa foni kuti ikhale yaying\'ono.'); return; }
-  btn.innerText='⏳ IKUKWEZA... Chonde dikirani';
-  btn.disabled=true;
-  status.innerText='⏳ Ikusunga nyimbo... Osatseka tsamba';
-  try{
-    const songURL = await readFileAsDataURL(songFile);
-    let coverURL = "https://picsum.photos/200/200?random="+Math.floor(Math.random()*1000);
-    if(coverFile){ coverURL = await readFileAsDataURL(coverFile); }
-    const newSong = {title:title, artist:artist, cover:coverURL, url:songURL};
-    savedSongs.unshift(newSong);
-    localStorage.setItem('badrat_saved_songs', JSON.stringify(savedSongs));
-    songs = [...savedSongs, ...defaultSongs];
-    document.getElementById('search').value='';
-    renderSongs();
-    status.innerText='✅ Nyimbo "'+title+'" yasungidwa! Ikuwonekera pamwamba pompo.';
-    alert('✅ Zatheka! Nyimbo "'+title+'" yasungidwa ndipo ikuwonekera pamwamba pompo. Ngakhale utadina Refresh, idzakhalabe.');
-    document.getElementById('songTitle').value=''; document.getElementById('artistName').value=''; document.getElementById('songFile').value=''; document.getElementById('coverFile').value='';
-    if(!localStorage.getItem('badrat_admin')){ localStorage.removeItem('badrat_paid'); updateUI(); }
-    window.scrollTo({top:0, behavior:'smooth'});
-  }catch(e){
-    alert('Upload yalephera. Yesaninso. Onetsetsani MP3 ndi yaying\'ono.');
-    status.innerText='';
-  }
-  btn.innerText='UPLOAD NYIMBO POMPO 🚀';
-  btn.disabled=false;
-}
-updateUI(); renderSongs();
+renderSongs();
 </script>
 </body>
 </html>
