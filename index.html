@@ -25,9 +25,8 @@ h2.section{margin:25px 0 10px;font-size:24px}
 .song-info b{font-size:17px;display:block}
 .song-info span{color:#aaa;font-size:13px}
 .song-actions{display:flex;flex-direction:column;gap:7px}
-.play-btn{background:#1ed760;border:none;width:42px;height:42px;border-radius:50%;font-size:18px;cursor:pointer}
 .dl-btn{background:#fff;color:#000;text-decoration:none;text-align:center;padding:8px 10px;border-radius:20px;font-size:13px;font-weight:bold}
-audio{width:100%;margin-top:8px}
+.dl-btn-green{background:#1ed760;color:#000;text-decoration:none;text-align:center;padding:8px 10px;border-radius:20px;font-size:13px;font-weight:bold}
 .wa-float{position:fixed;bottom:20px;right:20px;background:#25D366;color:#fff;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;text-decoration:none;box-shadow:0 4px 15px rgba(0,0,0,.5);z-index:99}
 .footer{text-align:center;color:#666;margin-top:30px;font-size:13px}
 .empty{text-align:center;color:#888;padding:20px}
@@ -65,28 +64,24 @@ audio{width:100%;margin-top:8px}
 <a class="wa-float" href="https://wa.me/265887222489?text=Moni%20Badrat!%20Ndikufuna%20kukweza%20nyimbo%20pa%20Badrat%20Music" target="_blank">💬</a>
 
 <script>
-// ====================================================
-// SINTHANI NYIMBO PANO - IZI NDI ZOMWE ALIYENSE ADZAWONA
-// Kuti muwonjezere nyimbo, koperani mzere umodzi, sinthani dzina, artist, link ya mp3 ndi chithunzi
-// ====================================================
 const songs = [
   {
-    title: "Moto",
-    artist: "Badrat",
-    cover: "https://picsum.photos/200/200?random=1",
-    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+    title: "Higher Heights",
+    artist: "Sir Spark",
+    cover: "https://picsum.photos/200/200?random=99",
+    url: "https://audiomack.com/sirspark382/song/higher-heights?share-user-id=243951082"
   },
   {
-    title: "Ndiyakukonda",
-    artist: "Badrat Ft. Chikondi",
-    cover: "https://picsum.photos/200/200?random=2",
-    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+    title: "Mommy Prayer",
+    artist: "Sir Spark",
+    cover: "https://picsum.photos/200/200?random=100",
+    url: "https://audiomack.com/sirspark382/song/69300551951f1?share-user-id=243951082"
   },
   {
-    title: "Blantyre Nights",
-    artist: "Badrat",
-    cover: "https://picsum.photos/200/200?random=3",
-    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+    title: "Apo Ndi Apo",
+    artist: "Yush Lawd",
+    cover: "https://picsum.photos/200/200?random=101",
+    url: "https://audiomack.com/yush-lawd/song/apo-ndi-apo?share-user-id=243951082"
   }
 ];
 
@@ -101,10 +96,11 @@ function renderSongs(){
       <div class="song-info">
         <b>${s.title}</b>
         <span>${s.artist}</span>
-        <audio controls src="${s.url}"></audio>
+        <br>
+        <a class="dl-btn-green" href="${s.url}" target="_blank" style="display:inline-block;margin-top:8px">▶️ Mvetserani pa Audiomack</a>
       </div>
       <div class="song-actions">
-        <a class="dl-btn" href="${s.url}" download="${s.title} - ${s.artist}.mp3">⬇️ Download</a>
+        <a class="dl-btn" href="${s.url}" target="_blank">⬇️ Download / Mvetserani</a>
         <a class="dl-btn" style="background:#25D366;color:#fff" href="https://wa.me/265887222489?text=${encodeURIComponent('Moni Badrat! Ndikukonda nyimbo: '+s.title+' - '+s.artist)}">💬 WhatsApp</a>
       </div>
     </div>
