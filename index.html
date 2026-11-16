@@ -1,92 +1,128 @@
+html
 <!DOCTYPE html>
-<html>
+<html lang="ny">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Badrat Music - Nyimbo Za Malawi</title>
-<meta name="description" content="Badrat Music - Kwezani ndi kumvetsera nyimbo za Malawi, Amapiano, Afro, Gospel, Hip Hop.">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#0f0f0f;color:white;padding:15px}
-header{text-align:center;padding:20px 0}
-header h1{color:#1ed760;font-size:30px}
-header p{color:#aaa;margin-top:5px}
-.box{background:#1e1e1e;border:2px dashed #1ed760;border-radius:15px;padding:20px;text-align:center;margin:20px 0}
-label{display:block;text-align:left;margin:15px 0 5px 5px;color:#1ed760;font-weight:bold;font-size:14px}
-input[type="text"]{width:100%;padding:13px;border-radius:10px;border:1px solid #555;background:#ffffff;color:#000000;font-size:15px;outline:none}
-input[type="text"]::placeholder{color:#666}
-.btn{background:#1ed760;color:black;padding:13px 20px;border-radius:25px;font-weight:bold;cursor:pointer;display:inline-block;margin-top:12px;border:none;width:100%;font-size:16px}
-.btn-white{background:white;color:black;padding:12px 20px;border-radius:25px;font-weight:bold;cursor:pointer;display:inline-block;margin-top:10px;border:none;width:100%}
-.song{background:#1e1e1e;border-radius:12px;padding:12px;margin:10px 0}
-.song b{font-size:16px}
-.song span{color:#aaa;font-size:13px}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#0a0a0a;color:#fff;padding:15px;padding-bottom:90px}
+.header{text-align:center;padding:20px 0 10px}
+.header h1{color:#1ed760;font-size:32px}
+.header p{color:#ccc;margin-top:5px}
+.search{width:100%;padding:13px;border-radius:25px;border:none;background:#222;color:#fff;font-size:16px;margin:15px 0;outline:none}
+.upload-box{border:2px dashed #1ed760;border-radius:15px;padding:18px;background:#111}
+.upload-box h2{text-align:center;margin-bottom:15px}
+.upload-box label{color:#1ed760;font-weight:bold;display:block;margin:12px 0 5px}
+.upload-box input{width:100%;padding:12px;border-radius:10px;border:none;font-size:15px}
+.btn-green{background:#1ed760;color:#000;font-weight:bold;border:none;width:100%;padding:14px;border-radius:25px;font-size:17px;margin-top:15px;cursor:pointer}
+.btn-wa{background:#25D366;color:#fff;font-weight:bold;border:none;width:100%;padding:14px;border-radius:25px;font-size:16px;margin-top:10px;cursor:pointer}
+h2.section{margin:25px 0 10px;font-size:24px}
+.song{background:#1a1a1a;border-radius:15px;padding:15px;margin-bottom:12px;display:flex;gap:12px;align-items:center}
+.song img{width:65px;height:65px;border-radius:10px;object-fit:cover;background:#333}
+.song-info{flex:1}
+.song-info b{font-size:17px;display:block}
+.song-info span{color:#aaa;font-size:13px}
+.song-actions{display:flex;flex-direction:column;gap:7px}
+.play-btn{background:#1ed760;border:none;width:42px;height:42px;border-radius:50%;font-size:18px;cursor:pointer}
+.dl-btn{background:#fff;color:#000;text-decoration:none;text-align:center;padding:8px 10px;border-radius:20px;font-size:13px;font-weight:bold}
 audio{width:100%;margin-top:8px}
-.search{width:100%;padding:12px;border-radius:25px;border:none;background:#222;color:white;margin:10px 0;outline:none}
+.wa-float{position:fixed;bottom:20px;right:20px;background:#25D366;color:#fff;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;text-decoration:none;box-shadow:0 4px 15px rgba(0,0,0,.5);z-index:99}
+.footer{text-align:center;color:#666;margin-top:30px;font-size:13px}
+.empty{text-align:center;color:#888;padding:20px}
 </style>
 </head>
 <body>
-<header>
+
+<div class="header">
 <h1>🎵 BADRAT MUSIC</h1>
 <p>Kwezani Nyimbo Zanu - Mvetserani Kwaulere</p>
-</header>
-
-<input class="search" id="search" placeholder="🔍 Sakani nyimbo..." onkeyup="searchSong()">
-
-<div class="box">
-<h3>Kwezani Nyimbo Yanu</h3>
-
-<label>1. Sankhani Nyimbo (MP3):</label>
-<input type="file" id="audioFile" accept="audio/*" style="color:white">
-
-<label>2. Dzina La Nyimbo:</label>
-<input type="text" id="songTitle" placeholder="Mwachitsanzo: Moto">
-
-<label>3. Dzina La Artist:</label>
-<input type="text" id="artistName" placeholder="Mwachitsanzo: Badrat">
-
-<label>4. Sankhani Chithunzi (Cover):</label>
-<input type="file" id="coverFile" accept="image/*" style="color:white">
-
-<button class="btn" onclick="uploadSong()">UPLOAD NYIMBO 🚀</button>
 </div>
 
-<h2>Nyimbo Zaposachedwa</h2>
+<input type="text" id="search" class="search" placeholder="🔍 Sakani nyimbo..." oninput="renderSongs()">
+
+<div class="upload-box">
+<h2>Kwezani Nyimbo Yanu</h2>
+<label>1. Dzina La Nyimbo:</label>
+<input type="text" id="songTitle" placeholder="Mwachitsanzo: Moto">
+<label>2. Dzina La Artist:</label>
+<input type="text" id="artistName" placeholder="Mwachitsanzo: Badrat">
+<label>3. Sankhani Fayilo Ya Nyimbo (MP3):</label>
+<input type="file" id="songFile" accept="audio/*">
+<label>4. Sankhani Chithunzi (Cover):</label>
+<input type="file" id="coverFile" accept="image/*">
+<button class="btn-green" onclick="uploadViaWhatsApp()">UPLOAD NYIMBO 🚀</button>
+<button class="btn-wa" onclick="openWhatsApp()">💬 Tumizani Kudzera pa WhatsApp</button>
+<p style="font-size:12px;color:#aaa;text-align:center;margin-top:10px">Mukadina, WhatsApp idzatseguka yokha kupita kwa Badrat. Tumizani nyimboyo kumeneko kuti tiyike kwa aliyense.</p>
+</div>
+
+<h2 class="section">Nyimbo Zaposachedwa</h2>
 <div id="songList"></div>
-<p style="text-align:center;color:#666;margin-top:30px">© 2026 Badrat Music - Made in Blantyre</p>
+
+<div class="footer">© 2026 Badrat Music - Made in Blantyre<br>WhatsApp: 0887222489</div>
+
+<a class="wa-float" href="https://wa.me/265887222489?text=Moni%20Badrat!%20Ndikufuna%20kukweza%20nyimbo%20pa%20Badrat%20Music" target="_blank">💬</a>
 
 <script>
-let songs = JSON.parse(localStorage.getItem('badratSongs') || '[]');
-function displaySongs(filter=""){
-  let list = document.getElementById('songList');
-  list.innerHTML = "";
-  if(songs.length==0){ list.innerHTML = "<p style='text-align:center;color:#888;margin:20px'>Palibe nyimbo pano. Kwezani yoyamba!</p>"; return; }
-  songs.forEach((s,i)=>{
-    if(filter && !s.title.toLowerCase().includes(filter.toLowerCase()) && !s.artist.toLowerCase().includes(filter.toLowerCase())) return;
-    list.innerHTML += `<div class="song"><b>${s.title}</b><br><span>${s.artist}</span><br><audio controls src="${s.audio}"></audio><br><button onclick="deleteSong(${i})" style="background:red;color:white;border:none;padding:6px 12px;border-radius:8px;margin-top:5px">Chotsani</button></div>`;
-  });
+// ====================================================
+// SINTHANI NYIMBO PANO - IZI NDI ZOMWE ALIYENSE ADZAWONA
+// Kuti muwonjezere nyimbo, koperani mzere umodzi, sinthani dzina, artist, link ya mp3 ndi chithunzi
+// ====================================================
+const songs = [
+  {
+    title: "Moto",
+    artist: "Badrat",
+    cover: "https://picsum.photos/200/200?random=1",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+  },
+  {
+    title: "Ndiyakukonda",
+    artist: "Badrat Ft. Chikondi",
+    cover: "https://picsum.photos/200/200?random=2",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+  },
+  {
+    title: "Blantyre Nights",
+    artist: "Badrat",
+    cover: "https://picsum.photos/200/200?random=3",
+    url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+  }
+];
+
+function renderSongs(){
+  const q = document.getElementById('search').value.toLowerCase();
+  const list = document.getElementById('songList');
+  const filtered = songs.filter(s => (s.title + " " + s.artist).toLowerCase().includes(q));
+  if(filtered.length===0){ list.innerHTML='<div class="empty">Palibe nyimbo pano. Kwezani yoyamba!</div>'; return; }
+  list.innerHTML = filtered.map((s,i)=>`
+    <div class="song">
+      <img src="${s.cover}" alt="cover">
+      <div class="song-info">
+        <b>${s.title}</b>
+        <span>${s.artist}</span>
+        <audio controls src="${s.url}"></audio>
+      </div>
+      <div class="song-actions">
+        <a class="dl-btn" href="${s.url}" download="${s.title} - ${s.artist}.mp3">⬇️ Download</a>
+        <a class="dl-btn" style="background:#25D366;color:#fff" href="https://wa.me/265887222489?text=${encodeURIComponent('Moni Badrat! Ndikukonda nyimbo: '+s.title+' - '+s.artist)}">💬 WhatsApp</a>
+      </div>
+    </div>
+  `).join('');
 }
-function searchSong(){ displaySongs(document.getElementById('search').value); }
-function deleteSong(i){ if(confirm('Chotsani nyimboyi?')){ songs.splice(i,1); localStorage.setItem('badratSongs', JSON.stringify(songs)); displaySongs(); } }
-function uploadSong(){
-  let title = document.getElementById('songTitle').value || "Nyimbo Yopanda Dzina";
-  let artist = document.getElementById('artistName').value || "Unknown Artist";
-  let audioFile = document.getElementById('audioFile').files[0];
-  if(!audioFile){ alert('Chonde sankhani nyimbo kaye!'); return; }
-  let reader = new FileReader();
-  reader.onload = function(e){
-    let audioData = e.target.result;
-    let coverFile = document.getElementById('coverFile').files[0];
-    if(coverFile){
-      let cr = new FileReader();
-      cr.onload = function(ev){ songs.unshift({title,artist,audio:audioData,cover:ev.target.result}); localStorage.setItem('badratSongs', JSON.stringify(songs)); displaySongs(); alert('Nyimbo yakwezedwa! 🎉'); };
-      cr.readAsDataURL(coverFile);
-    } else {
-      songs.unshift({title,artist,audio:audioData,cover:''}); localStorage.setItem('badratSongs', JSON.stringify(songs)); displaySongs(); alert('Nyimbo yakwezedwa! 🎉');
-    }
-  };
-  reader.readAsDataURL(audioFile);
+
+function uploadViaWhatsApp(){
+  const title = document.getElementById('songTitle').value || "Nyimbo Yatsopano";
+  const artist = document.getElementById('artistName').value || "Artist";
+  const msg = `Moni Badrat! 👋\n\nNdikufuna kukweza nyimbo pa Badrat Music:\n\n🎵 Dzina La Nyimbo: ${title}\n🎤 Artist: ${artist}\n\nNdikutumiza fayilo ya MP3 ndi Cover apa. Chonde muyike pa website.`;
+  window.open('https://wa.me/265887222489?text='+encodeURIComponent(msg), '_blank');
 }
-displaySongs();
+
+function openWhatsApp(){
+  window.open('https://wa.me/265887222489?text='+encodeURIComponent('Moni Badrat! Ndikufuna kukweza nyimbo.'), '_blank');
+}
+
+renderSongs();
 </script>
 </body>
 </html>
