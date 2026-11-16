@@ -90,7 +90,7 @@ h2.section{margin:25px 0 10px;font-size:24px}
 </div>
 
 <div id="uploadForm" style="display:none">
-  <p style="background:#1ed760;color:#000;padding:10px;border-radius:10px;text-align:center;font-weight:bold">✅ Malipiro Alandiridwa - Mutha Kukweza Nyimbo Imodzi Tsopano</p>
+  <p id="adminNote" style="background:#1ed760;color:#000;padding:10px;border-radius:10px;text-align:center;font-weight:bold">✅ Malipiro Alandiridwa - Mutha Kukweza Nyimbo Imodzi Tsopano</p>
   <label>1. Dzina La Nyimbo:</label>
   <input type="text" id="songTitle" placeholder="Mwachitsanzo: Moto">
   <label>2. Dzina La Artist:</label>
@@ -139,12 +139,14 @@ function closeModal(){document.getElementById('loginModal').style.display='none'
 function updateUI(){
   const user=localStorage.getItem('badrat_user');
   const paid=localStorage.getItem('badrat_paid');
+  const isAdmin=localStorage.getItem('badrat_admin');
   document.getElementById('needLogin').style.display = user ? 'none':'block';
   document.getElementById('needPay').style.display = (user && !paid) ? 'block':'none';
   document.getElementById('uploadForm').style.display = (user && paid) ? 'block':'none';
   document.getElementById('loginBtn').style.display = user ? 'none':'block';
   document.getElementById('logoutBtn').style.display = user ? 'block':'none';
-  document.getElementById('userLabel').innerText = user ? '👤 Takulandirani, '+user : '👤 Alendo - Mutha kumvetsera ulere';
+  document.getElementById('userLabel').innerText = isAdmin ? '👑 ADMIN - Takulandirani BOSS Badrat' : (user ? '👤 Takulandirani, '+user : '👤 Alendo - Mutha kumvetsera ulere');
+  if(isAdmin){ document.getElementById('adminNote').innerText = '👑 ADMIN MODE - Upload Ndi Yaulere Kwa Inu Boss'; }
 }
 function doLogin(){
   const name=document.getElementById('regName').value.trim();
@@ -152,9 +154,17 @@ function doLogin(){
   const pass=document.getElementById('regPass').value.trim();
   if(!name||!phone||!pass){alert('Lembani dzina, nambala ndi password zonse');return;}
   localStorage.setItem('badrat_user',name);
+  // NDIWE MWINI WEBSITE - SULIPIRA
+  if(phone === "0887222489" || phone === "0983523722" || name.toLowerCase() === "badrat"){
+    localStorage.setItem('badrat_admin','yes');
+    localStorage.setItem('badrat_paid','yes');
+    closeModal(); updateUI();
+    alert('Takulandirani BOSS Badrat! 👑 Inu ndinu Admin, Upload ndi yaulere kwa inu.');
+    return;
+  }
   closeModal(); updateUI(); alert('Takulandirani '+name+'! Tsopano lipirani K2,000 pa nyimbo imodzi kuti mukweze.');
 }
-function logout(){localStorage.removeItem('badrat_user');localStorage.removeItem('badrat_paid');updateUI();}
+function logout(){localStorage.removeItem('badrat_user');localStorage.removeItem('badrat_paid');localStorage.removeItem('badrat_admin');updateUI();}
 function confirmPayment(){
   const code=document.getElementById('transCode').value.trim();
   const method=document.getElementById('payMethod').value;
@@ -169,9 +179,10 @@ function uploadViaWhatsApp(){
   const artist=document.getElementById('artistName').value||"Artist";
   const msg=`Moni Badrat! 👋\nNdikufuna kukweza nyimbo:\n🎵 ${title}\n🎤 ${artist}\nNdalipira K2,000 kale. Ndikutumiza MP3 ndi Cover.`;
   window.open('https://wa.me/265887222489?text='+encodeURIComponent(msg),'_blank');
-  // Mukatumiza nyimbo imodzi, tsekani upload kuti nyimbo yotsatira alipirenso
-  localStorage.removeItem('badrat_paid');
-  setTimeout(updateUI, 1000);
+  if(!localStorage.getItem('badrat_admin')){
+    localStorage.removeItem('badrat_paid');
+    setTimeout(updateUI, 1000);
+  }
 }
 function openWhatsApp(){window.open('https://wa.me/265887222489','_blank')}
 updateUI(); renderSongs();
