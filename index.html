@@ -100,8 +100,8 @@ h2.section{margin:25px 0 10px;font-size:24px}
   <input type="file" id="songFile" accept="audio/*">
   <label>4. Sankhani Chithunzi (Cover):</label>
   <input type="file" id="coverFile" accept="image/*">
-  <button class="btn-green" onclick="uploadViaWhatsApp()">UPLOAD NYIMBO 🚀</button>
-  <button class="btn-wa" onclick="openWhatsApp()">💬 Tumizani Kudzera pa WhatsApp</button>
+  <button class="btn-green" onclick="uploadDirect()">UPLOAD NYIMBO POMPO 🚀</button>
+  <p style="font-size:12px;color:#aaa;text-align:center;margin-top:8px">Nyimboyo idzawonekera pompo pa website, osapita ku WhatsApp.</p>
 </div>
 </div>
 
@@ -124,7 +124,7 @@ h2.section{margin:25px 0 10px;font-size:24px}
 </div>
 
 <script>
-const songs = [
+let songs = [
   {title:"Higher Heights",artist:"Sir Spark",cover:"https://picsum.photos/200/200?random=99",url:"higher-heights.mp3"},
   {title:"Mommy Prayer",artist:"Sir Spark",cover:"https://picsum.photos/200/200?random=100",url:"mommy-prayer.mp3"},
   {title:"Apo Ndi Apo",artist:"Yush Lawd",cover:"https://picsum.photos/200/200?random=101",url:"apo-ndi-apo.mp3"}
@@ -230,20 +230,31 @@ function confirmPayment(){
   if(code.length<4){alert('Lembani Code ya Transaction kuchokera ku SMS');return;}
   localStorage.setItem('badrat_paid','yes');
   updateUI();
-  const msg=`Moni Badrat! Ndalipira K2,000 pa nyimbo imodzi.\nDzina: ${localStorage.getItem('badrat_user')}\nNjira: ${method}\nTransaction Code: ${code}\nChonde tsimikizirani.`;
-  window.open('https://wa.me/265887222489?text='+encodeURIComponent(msg),'_blank');
+  alert('Malipiro alandiridwa! Tsopano mukhoza kukweza nyimbo yanu pompo.');
 }
-function uploadViaWhatsApp(){
-  const title=document.getElementById('songTitle').value||"Nyimbo Yatsopano";
-  const artist=document.getElementById('artistName').value||"Artist";
-  const msg=`Moni Badrat! 👋\nNdikufuna kukweza nyimbo:\n🎵 ${title}\n🎤 ${artist}\nNdalipira K2,000 kale. Ndikutumiza MP3 ndi Cover.`;
-  window.open('https://wa.me/265887222489?text='+encodeURIComponent(msg),'_blank');
+function uploadDirect(){
+  const title=document.getElementById('songTitle').value.trim();
+  const artist=document.getElementById('artistName').value.trim();
+  const songFile=document.getElementById('songFile').files[0];
+  const coverFile=document.getElementById('coverFile').files[0];
+  if(!title||!artist){alert('Lembani dzina la nyimbo ndi artist');return;}
+  if(!songFile){alert('Sankhani fayilo ya MP3');return;}
+  const songURL = URL.createObjectURL(songFile);
+  let coverURL = "https://picsum.photos/200/200?random="+Math.floor(Math.random()*1000);
+  if(coverFile){ coverURL = URL.createObjectURL(coverFile); }
+  songs.unshift({title:title, artist:artist, cover:coverURL, url:songURL});
+  renderSongs();
+  alert('✅ Nyimbo "'+title+'" yakwezedwa bwino! Ikuwonekera pamwamba pompo.');
+  document.getElementById('songTitle').value='';
+  document.getElementById('artistName').value='';
+  document.getElementById('songFile').value='';
+  document.getElementById('coverFile').value='';
   if(!localStorage.getItem('badrat_admin')){
     localStorage.removeItem('badrat_paid');
-    setTimeout(updateUI, 1000);
+    updateUI();
   }
+  window.scrollTo({top:0, behavior:'smooth'});
 }
-function openWhatsApp(){window.open('https://wa.me/265887222489','_blank')}
 updateUI(); renderSongs();
 </script>
 </body>
